@@ -5,7 +5,15 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 
 const port = process.env.PORT || '3000'
-const config = require('./config');
+const config =
+  process.env.NODE_ENV === "production" ?
+   {
+    "dbUri" : process.env.MONGODB_URI,
+    "jwtSecret" : process.env.JWT_SECRET
+   }
+   :
+   require('./config');
+
 const app = express();
 
 require('./server/models').connect(config.dbUri);
@@ -32,7 +40,6 @@ const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-
 
 app.set('port', port);
 

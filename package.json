@@ -7,7 +7,9 @@
     "test": "./node_modules/mocha/bin/mocha test --watch",
     "dev": "nodemon index.js --exec babel-node",
     "devpack": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "postinstall" : "npm run build",
+    "start": "node index.js --exec babel-node"
   },
   "author": "",
   "license": "ISC",
